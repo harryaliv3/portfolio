@@ -1,25 +1,7 @@
- document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-    /* --- 1. MOBILE MENU TOGGLE --- */
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    // Toggle menu on button click
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-    });
-
-    // Close menu when a link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-        });
-    });
-
-    /* --- 2. ARCHIVE ASSETS --- */
+    // 1. ASSET CONFIG
+    // Note: Ensure all these files exist in your 'Assets' folder to avoid 404 errors.
     const assets = [
         "_O0A0032 (1).jpg", "_O0A0324.jpg", "_O0A0801 (3).jpg", "_O0A0889.jpg", "_O0A1099 (4).jpg",
         "_O0A1349.jpg", "_O0A1872 (1).jpg", "_O0A1875 (2).jpg", "_O0A2048.jpg", "_O0A2089.jpg",
@@ -48,29 +30,56 @@
         "PXL_20220824_093554068.jpg", "snapedit_1675184458509.jpg"
     ];
 
-    
+    // 2. POPULATE ARCHIVE (Optimized)
     const track = document.getElementById('archive-track');
-    // Triple the list for infinite loop illusion
-    const fullList = [...assets, ...assets, ...assets, ...assets, ...assets, ...assets]; 
     
+    // Duplicate list 3 times for loop
+    const fullList = [...assets, ...assets, ...assets];
+    
+    // Create a document fragment to batch DOM insertions (Performance)
+    const fragment = document.createDocumentFragment();
+
     fullList.forEach(filename => {
         const div = document.createElement('div');
         div.className = 'archive-item';
+        
         const img = document.createElement('img');
-        img.src = `Asset/${filename}`; // Ensure folder name is correct
+        img.src = `Asset/${filename}`; // Ensure this folder name matches your actual folder
+        img.loading = "lazy"; // Native Lazy Loading
         img.draggable = false;
+        img.alt = "Archive photograph"; 
+        
         div.appendChild(img);
-        track.appendChild(div);
+        fragment.appendChild(div);
     });
 
-    /* --- 3. PHYSICS SLIDER (TOUCH ENABLED) --- */
+    track.appendChild(fragment);
+
+    // 3. PHYSICS SCROLL ENGINE
     let currentX = 0;
+    let targetX = 0; // For smooth interpolation
+    let speed = 0.5;
+    let baseSpeed = 0.5;
     let isDragging = false;
     let startX = 0;
     let dragStartX = 0;
-    const wrapper = document.querySelector('.archive-slider-wrapper');
 
-    // Unified Start Function (Mouse & Touch)
+    const leftZone = document.getElementById('nav-left');
+    const rightZone = document.getElementById('nav-right');
+
+    // Acceleration Logic
+    if(leftZone) {
+        leftZone.addEventListener('mouseenter', () => { speed = 4; });
+        leftZone.addEventListener('mouseleave', () => { speed = baseSpeed; });
+    }
+    if(rightZone) {
+        rightZone.addEventListener('mouseenter', () => { speed = -4; });
+        rightZone.addEventListener('mouseleave', () => { speed = baseSpeed; });
+    }
+
+    const wrapper = document.querySelector('.archive-slider-wrapper');
+    
+    // Touch & Mouse Events for Dragging
     const startDrag = (x) => {
         isDragging = true;
         startX = x;
@@ -78,58 +87,95 @@
         wrapper.style.cursor = 'grabbing';
     };
 
-    // Unified Move Function
-    const moveDrag = (x) => {
-        if (!isDragging) return;
-        const walk = (x - startX) * 1.5; // Drag speed multiplier
-        currentX = dragStartX + walk;
-    };
-
     const endDrag = () => {
         isDragging = false;
         wrapper.style.cursor = 'grab';
     };
 
-    // Mouse Events
-    wrapper.addEventListener('mousedown', e => startDrag(e.pageX));
-    window.addEventListener('mousemove', e => moveDrag(e.pageX));
-    window.addEventListener('mouseup', endDrag);
+    const moveDrag = (x) => {
+        if (!isDragging) return;
+        const walk = (x - startX) * 2;
+        currentX = dragStartX + walk;
+    };
 
-    // Touch Events (CRITICAL FOR MOBILE)
-    wrapper.addEventListener('touchstart', e => startDrag(e.touches[0].pageX), { passive: true });
-    window.addEventListener('touchmove', e => moveDrag(e.touches[0].pageX), { passive: true });
+    // Mouse Listeners
+    wrapper.addEventListener('mousedown', e => startDrag(e.pageX));
+    window.addEventListener('mouseup', endDrag);
+    window.addEventListener('mousemove', e => moveDrag(e.pageX));
+
+    // Touch Listeners (Mobile Support)
+    wrapper.addEventListener('touchstart', e => startDrag(e.touches[0].pageX), {passive: true});
     window.addEventListener('touchend', endDrag);
+    window.addEventListener('touchmove', e => moveDrag(e.touches[0].pageX), {passive: true});
 
     // Animation Loop
     function animate() {
         if (!isDragging) {
-            currentX -= 0.5; // Auto-scroll speed
+            currentX -= speed;
         }
 
-        // Infinite Scroll Logic
+        // Infinite Loop Calculation
         const trackWidth = track.scrollWidth / 3;
-        if (currentX <= -trackWidth * 2) currentX = -trackWidth;
-        if (currentX > 0) currentX = -trackWidth;
+        
+        // Wrap around seamlessly
+        if (currentX <= -trackWidth * 2) {
+            currentX = -trackWidth;
+            dragStartX += trackWidth; // Adjustment to prevent jump if dragging during wrap
+        } else if (currentX > 0) {
+            currentX = -trackWidth;
+            dragStartX -= trackWidth;
+        }
 
-        track.style.transform = `translateX(${currentX}px)`;
+        // Apply Transform
+        track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+        
+        // Update Progress
+        const maxScroll = track.scrollWidth - window.innerWidth;
+        const progress = (Math.abs(currentX) % maxScroll) / maxScroll * 100;
+        const progressBar = document.getElementById('archive-progress');
+        if(progressBar) progressBar.style.width = `${Math.min(progress, 100)}%`;
+
         requestAnimationFrame(animate);
     }
     animate();
 
-    /* --- 4. CUSTOM CURSOR (DESKTOP ONLY) --- */
-    // We check if the device supports hover to avoid running this on mobile
-    if (window.matchMedia("(hover: hover)").matches) {
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorCircle = document.querySelector('.cursor-circle');
+
+    // 4. OPTIMIZED CUSTOM CURSOR (LERP)
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorCircle = document.querySelector('.cursor-circle');
+    
+    // Mouse position state
+    let mouseX = -100; // Start off screen
+    let mouseY = -100;
+    
+    // Circle position state (interpolated)
+    let circleX = -100;
+    let circleY = -100;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
         
-        document.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
-            
-            cursorCircle.animate({
-                left: e.clientX + 'px',
-                top: e.clientY + 'px'
-            }, { duration: 500, fill: "forwards" });
-        });
+        // Instant update for the dot
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+    });
+
+    function animateCursor() {
+        // Linear Interpolation (Lerp) for smooth trailing
+        // Formula: Current + (Target - Current) * Friction
+        circleX += (mouseX - circleX) * 0.15; 
+        circleY += (mouseY - circleY) * 0.15;
+
+        cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0) translate(-50%, -50%)`;
+        
+        requestAnimationFrame(animateCursor);
     }
+    animateCursor();
+
+    // Hover States
+    const interactables = document.querySelectorAll('a, button, .project-visual, .archive-slider-wrapper');
+    interactables.forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+    });
 });
