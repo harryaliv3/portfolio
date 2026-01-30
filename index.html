@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hariprasad P | Documentary Filmmaker</title>
+    <meta name="description" content="Documentary filmmaker bridging physics and visual storytelling.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">
+                <span class="brand-initial">H</span>
+                <span class="brand-text">Hariprasad P.</span>
+            </a>
+            
+            <button class="nav-toggle" aria-label="Menu">
+                <span></span><span></span>
+            </button>
+
+            <div class="nav-menu">
+                <a href="#work" class="nav-link">Stories</a>
+                <a href="#archive" class="nav-link">The Archive</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg">
+            <div class="noise-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-subtitle">Documentary Filmmaker · Photographer</div>
+            <h1 class="hero-title">
+                <span class="line">The Physics</span>
+                <span class="line indent">of Light & Truth</span>
+            </h1>
+            <p class="hero-desc">
+                Exploring human resilience through my lens.
+            </p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section id="work" class="section work-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Selected Stories</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <article class="project-card portrait-layout">
+                <div class="project-visual">
+                    <div class="image-container ratio-portrait">
+                        <img src="Assets/fadingfootsteps1.jpg" alt="Fading Footsteps Poster" loading="lazy">
+                        <div class="overlay">
+                            <a href="https://drive.google.com/file/d/17vF7JiWgoDk2mQ6fvDgTe5kNJuG-Ph7T/view?usp=drivesdk" target="_blank">
+                            <span>Watch Trailer</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="meta">
+                        <span>Documentary Feature</span>
+                        <span class="separator">/</span>
+                        <span>Uttarakhand</span>
+                    </div>
+                    <h3 class="project-title">Fading Footsteps</h3>
+                    <p class="project-desc">
+                        An eight-month observational documentary capturing the culture, traditions, and daily lives of the Palsi shepherds in the Western Himalayas. The project showcases long-term immersive filmmaking in one of India's most challenging environments.
+                    </p>
+                    <ul class="accolades">
+                        <li>Winner: Asian Talent Int. Film Festival, 6th Reels International Film Festival</li>
+                        <li>Official Selection: India, UK, Spain, Nepal, Denmark, France</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="project-card landscape-layout">
+                <div class="project-info">
+                    <div class="meta">
+                        <span>Documentary Short</span>
+                        <span class="separator">/</span>
+                        <span>Tamil Nadu</span>
+                    </div>
+                    <h3 class="project-title">Under The Scorching Sun</h3>
+                    <p class="project-desc">
+                        Short documentary based on life of people who work in the third largest salt production in Tamilnadu, Marakkanam salt pans. Prepared as part of Masters project work showcasing corrosive, scorching evaporation ponds yielding crystal salt.
+                    </p>
+                </div>
+                <div class="project-visual">
+                    <div class="image-container ratio-portrait">
+                        <img src="Assets/undersun2.png" alt="Salt Pan Worker" loading="lazy">
+                        <div class="overlay">
+                        <a href="https://www.youtube.com/watch?v=OCq_nwdzuwA" target="_blank">
+                        <span>View Project</span>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="archive" class="section archive-section">
+        <div class="container fluid">
+            <div class="archive-header">
+                <h2 class="section-title">Visual Archive</h2>
+                <p class="subtitle">Drag to explore · Hover sides to accelerate</p>
+            </div>
+            
+            <div class="archive-slider-wrapper">
+                <div class="nav-zone left" id="nav-left"></div>
+                <div class="nav-zone right" id="nav-right"></div>
+
+                <div class="archive-track" id="archive-track">
+                    </div>
+            </div>
+            
+            <div class="archive-footer">
+                <span>Hover to see the colour</span>
+                <div class="progress-bar"><div class="progress-fill" id="archive-progress"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about-section">
+        <div class="container narrow">
+            <h2 class="about-heading">The Physicist Behind the Lens</h2>
+            
+            <div class="about-grid">
+                <div class="about-quote">
+                    "There is a physics to light, but an art to seeing."
+                </div>
+                <div class="about-text">
+                    <p>
+                        I approach filmmaking with both technical precision and human empathy. My work explores the resilience of culture in challenging environments.
+                    </p>
+                    <div class="signature">Hariprasad P.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container text-center">
+            <h2 class="footer-title">Connect with me</h2>
+            <div class="contact-links">
+                <a href="mailto:hp26726@gmail.com" class="email-link">hp26726@gmail.com</a>
+                <div class="socials">
+                    <a href="https://www.instagram.com/harryaliv3/?hl=en">Instagram</a>
+                    <a href="https://youtube.com/@harryaliv3992?si=LgoA2gim8cskcPqz">Youtube</a>
+                    <a href="https://www.linkedin.com/in/hariprasad-p-b10096205/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Hariprasad P. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

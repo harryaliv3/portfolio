@@ -1,0 +1,218 @@
+/* ============================================
+   DESIGN SYSTEM
+   ============================================ */
+:root {
+    --bg-color: #050505;
+    --surface-color: #0a0a0a;
+    --text-main: #e0e0e0;
+    --text-muted: #888888;
+    --accent: #c17a4a; /* Clay/Earth Tone */
+    
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none; /* Custom Cursor */
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+.cursor-dot, .cursor-circle {
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+}
+.cursor-dot { width: 6px; height: 6px; background: white; }
+.cursor-circle { 
+    width: 40px; height: 40px; 
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: width 0.3s, height 0.3s, background 0.3s;
+}
+body.hovering .cursor-circle { width: 60px; height: 60px; border-color: var(--accent); background: rgba(193, 122, 74, 0.1); }
+
+/* ============================================
+   TYPOGRAPHY & UTILS
+   ============================================ */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; }
+.container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+.container.narrow { max-width: 900px; }
+.container.fluid { max-width: 100%; padding: 0; }
+.text-center { text-align: center; }
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 2rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
+}
+.nav-container { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+.nav-brand { font-family: var(--font-display); font-size: 1.5rem; color: #fff; text-decoration: none; letter-spacing: 1px; }
+.brand-initial { border: 1px solid var(--accent); padding: 0 8px; margin-right: 8px; color: var(--accent); }
+
+.nav-menu { display: flex; gap: 3rem; }
+.nav-link { color: #aaa; text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+.nav-link:hover { color: #fff; }
+.nav-toggle { display: none; }
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: #080808; z-index: -1; }
+.noise-overlay {
+    position: absolute; inset: 0; opacity: 0.05;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.hero-content { text-align: center; z-index: 2; }
+.hero-subtitle { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; margin-bottom: 1.5rem; }
+.hero-title { font-size: 5vw; line-height: 1.1; margin-bottom: 2rem; margin-left: 0rem}
+.hero-title .line { display: block; }
+.hero-title .indent { margin-left: 0rem; font-style: italic; color: #888; }
+.hero-desc { color: #666; font-size: 1.1rem; max-width: 400px; margin: 0 auto; }
+
+.scroll-indicator { position: absolute; bottom: 3rem; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.5; }
+.scroll-indicator .line { width: 1px; height: 40px; background: #fff; }
+
+/* ============================================
+   WORK SECTION (Aspect Ratio Fixes)
+   ============================================ */
+.section { padding: 8rem 0; }
+.section-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 5rem; }
+.section-title { font-size: 3rem; white-space: nowrap; }
+.section-line { height: 1px; width: 100%; background: #222; }
+
+.project-card { display: flex; gap: 5%; margin-bottom: 10rem; align-items: center; }
+
+/* Layout Variants */
+.project-card.portrait-layout { align-items: center; }
+.project-card.landscape-layout { flex-direction: row-reverse; }
+
+.project-visual { flex: 1.2; position: relative; }
+.project-info { flex: 1; }
+
+.image-container { position: relative; overflow: hidden; border-radius: 2px; }
+.image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-out); filter: grayscale(20%); }
+.image-container:hover img { transform: scale(1.05); filter: grayscale(0%); }
+
+/* Specific Aspect Ratios */
+.ratio-portrait { aspect-ratio: 2 / 3; max-width: 450px; } /* Movie Poster */
+.ratio-cinematic { aspect-ratio: 16 / 9; } /* Video Still */
+
+.overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+}
+.overlay span { border: 1px solid #fff; padding: 1rem 2rem; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
+.image-container:hover .overlay { opacity: 1; }
+
+.project-title { font-size: 2.5rem; margin: 1rem 0; }
+.project-desc { color: var(--text-muted); margin-bottom: 2rem; }
+.meta { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+.accolades { list-style: none; border-left: 2px solid #222; padding-left: 1rem; color: #666; font-size: 0.9rem; }
+.accolades li { margin-bottom: 0.5rem; }
+
+/* ============================================
+   ARCHIVE (Interactive Physics Slider)
+   ============================================ */
+.archive-section { background: #0a0a0a; padding-bottom: 4rem; overflow: hidden; }
+.archive-header { text-align: center; margin-bottom: 3rem; }
+.archive-header .subtitle { color: #555; font-style: italic; }
+
+.archive-slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px; /* Slider Height */
+    overflow: hidden;
+    cursor: grab;
+}
+.archive-slider-wrapper:active { cursor: grabbing; }
+
+.archive-track {
+    display: flex;
+    gap: 1.5rem;
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    will-change: transform; /* Performance */
+    padding-left: 5vw; /* Start with some padding */
+}
+
+.archive-item {
+    height: 100%;
+    flex-shrink: 0;
+    width: auto;
+    position: relative;
+}
+.archive-item img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.4s;
+    border-radius: 2px;
+}
+.archive-item:hover img { filter: grayscale(0%); }
+
+/* Acceleration Zones */
+.nav-zone { position: absolute; top: 0; width: 15%; height: 100%; z-index: 10; }
+.nav-zone.left { left: 0; background: linear-gradient(to right, #0a0a0a, transparent); cursor: w-resize; }
+.nav-zone.right { right: 0; background: linear-gradient(to left, #0a0a0a, transparent); cursor: e-resize; }
+
+.archive-footer { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 2rem 5%; border-top: 1px solid #1a1a1a; margin-top: 2rem; 
+    color: #444; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+}
+.progress-bar { width: 200px; height: 2px; background: #222; position: relative; }
+.progress-fill { height: 100%; background: var(--accent); width: 0%; position: absolute; left: 0; top: 0; }
+
+/* ============================================
+   ABOUT & FOOTER
+   ============================================ */
+.about-quote { font-family: var(--font-display); font-size: 2rem; color: var(--accent); margin-bottom: 2rem; border-left: 3px solid var(--accent); padding-left: 2rem; }
+.about-text { font-size: 1.2rem; color: #999; }
+.signature { margin-top: 2rem; font-family: var(--font-display); font-size: 1.5rem; font-style: italic; color: #fff; }
+
+.footer { padding: 6rem 0; background: #000; border-top: 1px solid #111; }
+.footer-title { font-size: 3rem; margin-bottom: 2rem; }
+.email-link { font-size: 1.5rem; color: #fff; text-decoration: none; border-bottom: 1px solid #333; padding-bottom: 5px; }
+.socials { margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; }
+.socials a { color: #666; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .nav-menu { display: none; } /* Simplified for demo */
+    .nav-toggle { display: block; width: 30px; height: 20px; position: relative; }
+    .nav-toggle span { display: block; width: 100%; height: 2px; background: #fff; margin-bottom: 6px; }
+    
+    .hero-title { font-size: 3rem; }
+    
+    .project-card, .project-card.landscape-layout { flex-direction: column; text-align: left; gap: 2rem; }
+    .ratio-portrait { max-width: 100%; margin: 0 auto; }
+    
+    .archive-slider-wrapper { height: 250px; }
+    .nav-zone { display: none; } /* Disable hover zones on touch */
+}
