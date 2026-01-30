@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         
         // --- CRITICAL FIX: Changed 'Asset/' to 'Assets/' to match your folder ---
-        img.src = `Assets/${filename}`; 
+        img.src = `Asset/${filename}`; 
         
         img.loading = "lazy";
         img.draggable = false;
