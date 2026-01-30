@@ -169,73 +169,52 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; color: #fff; }
 .accolades li { margin-bottom: 0.5rem; }
 
 /* ============================================
-   ARCHIVE (Modern Masonry Grid)
+   ARCHIVE (Masonry Layout)
    ============================================ */
+.archive-section { background: #0a0a0a; min-height: 100vh; }
+.archive-header { text-align: center; margin-bottom: 4rem; }
 
-.archive-section {
-    background: #0a0a0a;
-    min-height: 100vh;
-}
-
-/* Header stays untouched visually */
-.archive-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-/* Masonry via CSS Grid */
+/* REPLACED GRID WITH COLUMNS */
 .archive-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    column-count: 3; /* Creates 3 vertical columns */
+    column-gap: 1.5rem; /* Space between columns */
     width: 100%;
 }
 
-/* Archive item */
 .archive-item {
     position: relative;
+    /* Removed aspect-ratio: 1/1 constraint */
+    display: inline-block; /* Essential for column layout */
+    width: 100%;
+    margin-bottom: 1.5rem; /* Creates vertical spacing between items */
+    break-inside: avoid; /* Prevents images from getting cut between columns */
+    
     background: #111;
     border-radius: 2px;
-    overflow: hidden; /* KEY: prevents zoom clipping */
-    
     opacity: 0;
-    transform: translateY(24px);
-    transition:
-        opacity 0.4s ease,
-        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.6s ease;
 }
 
-/* Reveal on load */
 .archive-item.loaded {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Image */
 .archive-item img {
     width: 100%;
-    height: auto;
-    display: block;
-
+    height: auto; /* Allows natural height based on aspect ratio */
+    display: block; /* Removes bottom whitespace */
+    transition: filter 0.4s ease, transform 0.5s ease;
     filter: grayscale(100%);
-    transform: scale(1);
-    transition:
-        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 0.4s ease;
 }
 
-/* Hover interaction */
 .archive-item:hover img {
     filter: grayscale(0%);
-    transform: scale(1.035);
+    transform: scale(1.03); /* Subtle zoom */
 }
 
-/* Load more section */
-.archive-actions {
-    margin-top: 4rem;
-    padding-bottom: 2rem;
-    text-align: center;
-}
+.archive-actions { margin-top: 4rem; padding-bottom: 2rem; }
 
 .btn-load-more {
     background: transparent;
@@ -247,18 +226,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; color: #fff; }
     letter-spacing: 2px;
     font-size: 0.8rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
-
-.btn-load-more:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-.btn-load-more:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+.btn-load-more:hover { border-color: var(--accent); color: var(--accent); }
+.btn-load-more:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* ============================================
    ABOUT & FOOTER
