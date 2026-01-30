@@ -213,6 +213,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 400; color: #fff; }
     filter: grayscale(0%);
     transform: scale(1.03); /* Subtle zoom */
 }
+.archive-item {
+    overflow: hidden;
+}
 
 .archive-actions { margin-top: 4rem; padding-bottom: 2rem; }
 
