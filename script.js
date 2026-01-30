@@ -2,29 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. ASSET CONFIG
     // Keeping your original asset list
-    const assets = [
-        "_O0A0032 (1).jpg", "_O0A0324.jpg", "_O0A0801 (3).jpg", "_O0A0889.jpg", "_O0A1099 (4).jpg", 
-        "_O0A1349.jpg", "_O0A1872 (1).jpg", "_O0A1875 (2).jpg", "_O0A2048.jpg", "_O0A2089.jpg", "_O0A2094 (1).jpg", 
-        "_O0A2146 (2).jpg", "_O0A2187 (2).jpg", "_O0A2279.jpg", "_O0A2440 (1).jpg", "_O0A2484 (2).jpg", "_O0A2690.jpg",
-        "_O0A3848.jpg", "_O0A3932 (1).jpg", "_O0A3963 (3).jpg", "_O0A4177.jpg", "_O0A4198.jpg", "_O0A4213.jpg", 
-        "_O0A5343 (1).jpg", "_O0A5378 (1).jpg", "_O0A5435.jpg", "_O0A5674.jpg", "_O0A6965 (4).jpg", "_O0A7021.jpg", 
-        "_O0A7048.jpg", "_O0A7563 (2).jpg", "_O0A8002.jpg", "_O0A8346.jpg", "_O0A8463 (2).jpg", "_O0A8553 (1).jpg", 
-        "_O0A8712.jpg", "_O0A8717.jpg", "_O0A8829 (1).jpg", "_O0A9061.jpg", "5_6285049055550636299 (1).jpg", 
-        "5_6334666334525195823.jpg", "Copy of 5_6312044475489191091.jpg", "Copy of 5_6334864272387999694.jpg", 
-        "Copy of LRM_EXPORT_20190414_120134.jpg", "DSC_0010.jpg", "DSC_0257.jpg", "DSC_7239.jpg", "DSC00528 (1) (1).jpg", 
-        "DSC05859 (2).jpg", "DSC08320 (3).jpg", "DSC08959 (3).jpg", "Greater flamingo 4- water birds Hariprasad.jpg", 
-        "Greater flamingo, 4-water birds, Hariprasad (1).jpg", "IMG_1430 (1).jpg", "IMG_20221021_150903.jpg", "IMG_9877.jpg", 
-        "LRM_EXPORT_14033515479246_20191222_034113589.jpg", "LRM_EXPORT_1447011668142_20200501_111955663.jpg", 
-        "LRM_EXPORT_20190122_122547.jpg", "LRM_EXPORT_20190219_182517.jpg", "LRM_EXPORT_20190225_091034.jpg", 
-        "LRM_EXPORT_20190225_092625.jpg", "LRM_EXPORT_20190228_011143.jpg", "LRM_EXPORT_20190228_101030.jpg", 
-        "LRM_EXPORT_20190228_110243.jpg", "LRM_EXPORT_20190321_235033.jpg", "LRM_EXPORT_20190414_102355.jpg", 
-        "LRM_EXPORT_20190415_121345.jpg", "LRM_EXPORT_20190424_195049.jpg", "LRM_EXPORT_20190604_211443.jpg", 
-        "LRM_EXPORT_239422199673113_20200222_115300032.jpg", "LRM_EXPORT_277105147636172_20190827_181912485.jpg", 
-        "LRM_EXPORT_279219095589741_20190827_185426433.jpg", "LRM_EXPORT_280758891977553_20191123_020815574.jpg", 
-        "LRM_EXPORT_350461471832643_20191219_002332893.jpg", "LRM_EXPORT_373420696009215_20191125_000848462.jpg", 
-        "LRM_EXPORT_387333190711256_20200524_165608179.jpg", "LRM_EXPORT_47991701401575_20191107_201323622.jpg", 
-        "LRM_EXPORT_51724203312498_20191117_233948067.jpg", "LRM_EXPORT_78339202494547_20190905_104117207-01.jpg", 
-        "PXL_20220824_093554068.jpg", "snapedit_1675184458509.jpg"
+    const assets = ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg",
+        "10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg",
+        "20.jpg","21.jpg","22.jpg","23.jpg","24.jpg","25.jpg","26.jpg","27.jpg","28.jpg","29.jpg",
+        "30.jpg","31.jpg","32.jpg","33.jpg","34.jpg","35.jpg","36.jpg","37.jpg","38.jpg","39.jpg",
+        "40.jpg","41.jpg","42.jpg","43.jpg","44.jpg","45.jpg","46.jpg","47.jpg","48.jpg","49.jpg",
+        "50.jpg","51.jpg","52.jpg","53.jpg","54.jpg","55.jpg","56.jpg","57.jpg","58.jpg","59.jpg",
+        "60.jpg","61.jpg","62.jpg","63.jpg","64.jpg","65.jpg","66.jpg","67.jpg","68.jpg","69.jpg",
+        "70.jpg","71.jpg","72.jpg","73.jpg","74.jpg","75.jpg","76.jpg","77.jpg","78.jpg","79.jpg",
+        "80.jpg","81.jpg","82.jpg"
     ];
 
     // 2. GRID SYSTEM (OPTIMIZED)
