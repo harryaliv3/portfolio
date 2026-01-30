@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const div = document.createElement('div');
         div.className = 'archive-item';
         const img = document.createElement('img');
-        img.src = `Assets/${filename}`;
+        img.src = `Asset/${filename}`;
         img.draggable = false; // Prevent default drag behavior
         div.appendChild(img);
         track.appendChild(div);
