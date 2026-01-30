@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         "LRM_EXPORT_51724203312498_20191117_233948067.jpg", "LRM_EXPORT_78339202494547_20190905_104117207-01.jpg",
         "PXL_20220824_093554068.jpg", "snapedit_1675184458509.jpg"
     ];
-
     // 2. POPULATE ARCHIVE (Optimized)
     const track = document.getElementById('archive-track');
     
